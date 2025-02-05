@@ -30,7 +30,7 @@ class AutoIyuuDelete(_PluginBase):
     # 插件图标
     plugin_icon = "movie.jpg"
     # 插件版本
-    plugin_version = "2.0.0"
+    plugin_version = "1.0.12"
     # 插件作者
     plugin_author = "myderr"
     # 作者主页
@@ -69,6 +69,7 @@ class AutoIyuuDelete(_PluginBase):
     _clearflag = False
 
     def init_plugin(self, config: dict = None):
+        logger.info("初始化")
         self.downloadchain = DownloadChain()
         self.subscribechain = SubscribeChain()
         self.mediachain = MediaChain()
