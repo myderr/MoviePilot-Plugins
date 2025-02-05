@@ -22,7 +22,7 @@ from app.utils.dom import DomUtils
 from app.utils.http import RequestUtils
 
 
-class DoubanRank(_PluginBase):
+class AutoIyuuDelete(_PluginBase):
     # 插件名称
     plugin_name = "iyuu辅种自动删除"
     # 插件描述
@@ -36,7 +36,7 @@ class DoubanRank(_PluginBase):
     # 作者主页
     author_url = "https://github.com/myderr"
     # 插件配置项ID前缀
-    plugin_config_prefix = "doubanrank_"
+    plugin_config_prefix = "autoiyuudelete_"
     # 加载顺序
     plugin_order = 6
     # 可使用的用户级别
@@ -67,7 +67,6 @@ class DoubanRank(_PluginBase):
     _vote = 0
     _clear = False
     _clearflag = False
-    _proxy = False
 
     def init_plugin(self, config: dict = None):
         self.downloadchain = DownloadChain()
@@ -77,7 +76,6 @@ class DoubanRank(_PluginBase):
         if config:
             self._enabled = config.get("enabled")
             self._cron = config.get("cron")
-            self._proxy = config.get("proxy")
             self._onlyonce = config.get("onlyonce")
             self._vote = float(config.get("vote")) if config.get("vote") else 0
             rss_addrs = config.get("rss_addrs")
@@ -212,22 +210,6 @@ class DoubanRank(_PluginBase):
                                     {
                                         'component': 'VSwitch',
                                         'props': {
-                                            'model': 'proxy',
-                                            'label': '使用代理服务器',
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                'component': 'VCol',
-                                'props': {
-                                    'cols': 12,
-                                    'md': 4
-                                },
-                                'content': [
-                                    {
-                                        'component': 'VSwitch',
-                                        'props': {
                                             'model': 'onlyonce',
                                             'label': '立即运行一次',
                                         }
@@ -348,7 +330,6 @@ class DoubanRank(_PluginBase):
         ], {
             "enabled": False,
             "cron": "",
-            "proxy": False,
             "onlyonce": False,
             "vote": "",
             "ranks": [],
@@ -640,10 +621,7 @@ class DoubanRank(_PluginBase):
         获取RSS
         """
         try:
-            if self._proxy:
-                ret = RequestUtils(proxies=settings.PROXY).get_res(addr)
-            else:
-                ret = RequestUtils().get_res(addr)
+            ret = RequestUtils().get_res(addr)
             if not ret:
                 return []
             ret_xml = ret.text
