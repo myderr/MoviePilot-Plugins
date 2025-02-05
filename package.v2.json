@@ -3,7 +3,7 @@
         "name": "iyuu辅种自动删除",
         "description": "辅种原始文件删除后删除辅种",
         "labels": "做种",
-        "version": "1.0.1",
+        "version": "1.0.11",
         "icon": "movie.jpg",
         "author": "myderr",
         "level": 2,
