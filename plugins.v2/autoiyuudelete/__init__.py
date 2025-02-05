@@ -24,17 +24,17 @@ from app.utils.http import RequestUtils
 
 class DoubanRank(_PluginBase):
     # 插件名称
-    plugin_name = "豆瓣榜单订阅"
+    plugin_name = "iyuu辅种自动删除"
     # 插件描述
-    plugin_desc = "监控豆瓣热门榜单，自动添加订阅。"
+    plugin_desc = "辅种原始文件删除后删除辅种"
     # 插件图标
     plugin_icon = "movie.jpg"
     # 插件版本
-    plugin_version = "1.9.1"
+    plugin_version = "2.0.0"
     # 插件作者
-    plugin_author = "jxxghp"
+    plugin_author = "myderr"
     # 作者主页
-    author_url = "https://github.com/jxxghp"
+    author_url = "https://github.com/myderr"
     # 插件配置项ID前缀
     plugin_config_prefix = "doubanrank_"
     # 加载顺序
@@ -247,7 +247,7 @@ class DoubanRank(_PluginBase):
                                 },
                                 'content': [
                                     {
-                                        'component': 'VTextField',
+                                        'component': 'VCronField',
                                         'props': {
                                             'model': 'cron',
                                             'label': '执行周期',
